@@ -31,7 +31,7 @@ public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodM
     static {
         SUPPORTED_PRIMITIVES.add(PointcutPrimitive.EXECUTION);
     }
-
+    //切点表达表达式
     private final PointcutExpression pointcutExpression;
 
     public AspectJExpressionPointcut(String expression) {
@@ -41,9 +41,16 @@ public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodM
 
     @Override
     public boolean matches(Class<?> clazz) {
+
         return pointcutExpression.couldMatchJoinPointsInType(clazz);
     }
 
+    /**
+     * 只提供对方法的考察
+     * @param method
+     * @param targetClass
+     * @return
+     */
     @Override
     public boolean matches(Method method, Class<?> targetClass) {
         return pointcutExpression.matchesMethodExecution(method).alwaysMatches();

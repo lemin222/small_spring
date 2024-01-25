@@ -6,6 +6,10 @@ import cn.bugstack.springframework.test.bean.UserService;
 
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
+    public MyBeanPostProcessor() {
+        System.out.println("创建");
+    }
+
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if ("userService".equals(beanName)) {

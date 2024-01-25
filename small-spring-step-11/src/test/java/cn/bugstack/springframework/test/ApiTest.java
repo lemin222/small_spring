@@ -7,6 +7,7 @@ import cn.bugstack.springframework.aop.aspectj.AspectJExpressionPointcut;
 import cn.bugstack.springframework.aop.framework.Cglib2AopProxy;
 import cn.bugstack.springframework.aop.framework.JdkDynamicAopProxy;
 import cn.bugstack.springframework.aop.framework.ReflectiveMethodInvocation;
+import cn.bugstack.springframework.test.TestBean.MyUserService;
 import cn.bugstack.springframework.test.bean.IUserService;
 import cn.bugstack.springframework.test.bean.UserService;
 import cn.bugstack.springframework.test.bean.UserServiceInterceptor;
@@ -29,8 +30,15 @@ public class ApiTest {
         Class<UserService> clazz = UserService.class;
         Method method = clazz.getDeclaredMethod("queryUserInfo");
 
+        MyUserService myUserService = new MyUserService();
+        Class<MyUserService> aClass = MyUserService.class;
+        Method info = aClass.getDeclaredMethod("queryUserInfo");
         System.out.println(pointcut.matches(clazz));
+        System.out.println(pointcut.matches(aClass));
         System.out.println(pointcut.matches(method, clazz));
+        System.out.println(pointcut.matches(method, null));
+        System.out.println(pointcut.matches(info, aClass));
+        System.out.println(pointcut.matches(info, clazz));
     }
 
     @Test
@@ -76,19 +84,28 @@ public class ApiTest {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 if (methodMatcher.matches(method, targetObj.getClass())) {
                     // 方法拦截器
-                    MethodInterceptor methodInterceptor = invocation -> {
+                    //MethodInterceptor methodInterceptor = invocation -> {
+                    //    long start = System.currentTimeMillis();
+                    //    try {
+                    //        return invocation.proceed();
+                    //    } finally {
+                    //        System.out.println("监控 - Begin By AOP");
+                    //        System.out.println("方法名称：" + invocation.getMethod().getName());
+                    //        System.out.println("方法耗时：" + (System.currentTimeMillis() - start) + "ms");
+                    //        System.out.println("监控 - End\r\n");
+                    //    }
+                    //};
+                    //// 反射调用
+                    //return methodInterceptor.invoke(new ReflectiveMethodInvocation(targetObj, method, args));
                         long start = System.currentTimeMillis();
                         try {
-                            return invocation.proceed();
+                            return method.invoke(targetObj, args);
                         } finally {
                             System.out.println("监控 - Begin By AOP");
-                            System.out.println("方法名称：" + invocation.getMethod().getName());
+                            System.out.println("方法名称：" + method.getName());
                             System.out.println("方法耗时：" + (System.currentTimeMillis() - start) + "ms");
                             System.out.println("监控 - End\r\n");
                         }
-                    };
-                    // 反射调用
-                    return methodInterceptor.invoke(new ReflectiveMethodInvocation(targetObj, method, args));
                 }
                 return method.invoke(targetObj, args);
             }

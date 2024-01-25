@@ -36,6 +36,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
                 if (StrUtil.isNotEmpty(beanScope)) {
                     beanDefinition.setScope(beanScope);
                 }
+                //默认把类名小写作为bean的名字
                 registry.registerBeanDefinition(determineBeanName(beanDefinition), beanDefinition);
             }
         }

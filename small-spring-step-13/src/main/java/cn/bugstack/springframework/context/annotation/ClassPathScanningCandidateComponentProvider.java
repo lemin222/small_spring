@@ -20,6 +20,8 @@ import java.util.Set;
  */
 public class ClassPathScanningCandidateComponentProvider {
 
+
+    //读取指定包下面的带有Coment的类，把这些类封装成BeanDefinition放到set中
     public Set<BeanDefinition> findCandidateComponents(String basePackage) {
         Set<BeanDefinition> candidates = new LinkedHashSet<>();
         Set<Class<?>> classes = ClassUtil.scanPackageByAnnotation(basePackage, Component.class);

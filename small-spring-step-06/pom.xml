@@ -16,7 +16,7 @@
 
     <name>small-spring-step-06</name>
     <description>
-        small spring is easy study Spring！
+        引入spring上下文,BeanPostProcessor,BeanFactoryPostProcessor
     </description>
     <url>https://github.com/fuzhengwei/small-spring</url>
 

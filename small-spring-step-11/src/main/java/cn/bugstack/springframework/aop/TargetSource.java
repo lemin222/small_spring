@@ -8,10 +8,6 @@ package cn.bugstack.springframework.aop;
  * 被代理的目标对象
  * <p>
  *
- *
- *
- *
- *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public class TargetSource {

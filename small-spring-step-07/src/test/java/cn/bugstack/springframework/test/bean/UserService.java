@@ -3,6 +3,8 @@ package cn.bugstack.springframework.test.bean;
 import cn.bugstack.springframework.beans.factory.DisposableBean;
 import cn.bugstack.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+
 /**
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
@@ -17,6 +19,8 @@ public class UserService implements InitializingBean, DisposableBean {
     public void destroy() throws Exception {
         System.out.println("执行：UserService.destroy");
     }
+
+
 
     @Override
     public void afterPropertiesSet() throws Exception {

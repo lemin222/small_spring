@@ -16,7 +16,7 @@
 
     <name>small-spring-step-09</name>
     <description>
-        small spring is easy study Spring！
+       FactoryBean接口和对象作用域（singletonBean和prototype）
     </description>
     <url>https://github.com/fuzhengwei/small-spring</url>
 

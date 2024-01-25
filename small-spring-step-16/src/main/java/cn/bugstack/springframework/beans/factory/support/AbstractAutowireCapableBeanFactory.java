@@ -38,7 +38,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         if (null != bean) {
             return bean;
         }
-
         return doCreateBean(beanName, beanDefinition, args);
     }
 

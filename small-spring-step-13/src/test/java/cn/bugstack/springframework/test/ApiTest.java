@@ -50,5 +50,9 @@ public class ApiTest {
 
         System.out.println(beanPostProcessors.size());
     }
+    @Test
+    public void test_split(){
+
+    }
 
 }

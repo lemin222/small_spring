@@ -11,9 +11,7 @@ public class BeanDefinition {
 
     private PropertyValues propertyValues;
 
-    private String initMethodName;
-    
-    private String destroyMethodName;
+
 
     public BeanDefinition(Class beanClass) {
         this.beanClass = beanClass;
@@ -40,6 +38,10 @@ public class BeanDefinition {
     public void setPropertyValues(PropertyValues propertyValues) {
         this.propertyValues = propertyValues;
     }
+
+    private String initMethodName;
+
+    private String destroyMethodName;
 
     public String getInitMethodName() {
         return initMethodName;

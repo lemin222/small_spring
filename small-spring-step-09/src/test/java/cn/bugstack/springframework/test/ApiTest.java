@@ -2,6 +2,7 @@ package cn.bugstack.springframework.test;
 
 import cn.bugstack.springframework.context.support.ClassPathXmlApplicationContext;
 import cn.bugstack.springframework.test.bean.IUserDao;
+import cn.bugstack.springframework.test.bean.ProxyBeanFactory;
 import cn.bugstack.springframework.test.bean.UserService;
 import org.junit.Test;
 import org.openjdk.jol.info.ClassLayout;
@@ -38,6 +39,13 @@ public class ApiTest {
         // 2. 调用代理方法
         UserService userService = applicationContext.getBean("userService", UserService.class);
         System.out.println("测试结果：" + userService.queryUserInfo());
+        Object o = applicationContext.getBean("proxyUserDao", ProxyBeanFactory.class);
+        System.out.println(o.getClass());
+    }
+    @Test
+    public void tets(){
+        Object o="115";
+        System.out.println(o.getClass());
     }
 
 }

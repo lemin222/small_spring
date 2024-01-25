@@ -17,7 +17,7 @@
 
     <name>small-spring-step-07</name>
     <description>
-        small spring is easy study Spring！
+       bean的初始化方法和销毁方法
     </description>
     <url>https://github.com/fuzhengwei/small-spring</url>
 

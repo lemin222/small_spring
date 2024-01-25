@@ -37,7 +37,7 @@ public class AutowiredAnnotationBeanPostProcessor implements InstantiationAwareB
 
     @Override
     public PropertyValues postProcessPropertyValues(PropertyValues pvs, Object bean, String beanName) throws BeansException {
-        // 1. 处理注解 @Value
+        // 1. 处理注解 @Value   如果属性上有value注解，则用value注解的值设置为属性的值
         Class<?> clazz = bean.getClass();
         clazz = ClassUtils.isCglibProxyClass(clazz) ? clazz.getSuperclass() : clazz;
 
@@ -52,7 +52,12 @@ public class AutowiredAnnotationBeanPostProcessor implements InstantiationAwareB
             }
         }
 
+
         // 2. 处理注解 @Autowired
+       // 如果有@autowired注解，则要判断有没有@Qualifier注解：
+       //                               1.有，获取@Qualifier注解的值（beanName),根据beanName获取从BF中获取bean。然后设置为属性的值
+       //                                2.没有则根据属性类型获取从BF中获取bean，然后设置为属性的值
+       //   没有:则不做处理
         for (Field field : declaredFields) {
             Autowired autowiredAnnotation = field.getAnnotation(Autowired.class);
             if (null != autowiredAnnotation) {
